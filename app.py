@@ -72,11 +72,13 @@ if st.button("Predict"):
 
 if show_metrics:
     st.write("## Test Set Evaluation")
-    df = pd.read_csv('data/Crypto_enhanced_dataset.csv')
+    # df = pd.read_csv('data/Crypto_enhanced_dataset.csv')
+    df = pd.read_csv('data/final_labeled.csv')
+
 
     slug_series = df['url'].fillna('').apply(lambda u: u.rstrip('/').split('/')[-1])
     texts = (df['name'].fillna('') + ' ' + slug_series).astype(str)
-    y_true = df['is_scam']
+    y_true = df['label']
 
     for label, pipe in [
         ("Random Forest", rf_pipeline)
